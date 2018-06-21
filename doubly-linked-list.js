@@ -15,28 +15,28 @@ class DoublyLinkedList {
     this.length = 0;
   }
 
-  insertFirst(item){
-    if (!this.head){
+  insertFirst(item) {
+    if (!this.head) {
       const brandNewNode = new _Node(item, null, null);
       this.head = brandNewNode;
       this.tail = brandNewNode;
       this.length++;
       return;
     }
-    
-    const newNode = new _Node (item, this.head, null);
+
+    const newNode = new _Node(item, this.head, null);
     this.head.previous = newNode;
-    this.head = newNode; 
+    this.head = newNode;
     this.length++;
   }
 
   insertLast(item) {
-    if(!this.head){
+    if (!this.head) {
       this.insertFirst(item);
     }
     else {
       let current = this.head;
-      while(current.next !== null) {
+      while (current.next !== null) {
         current = current.next;
       }
       const newNode = new _Node(item, null, current);
@@ -47,47 +47,47 @@ class DoublyLinkedList {
   }
 
   insertBefore(newItem, oldItem) {
-    if (!this.head){
+    if (!this.head) {
       this.insertFirst(newItem);
       return;
     }
     else {
-      if(this.head.value === oldItem){
+      if (this.head.value === oldItem) {
         this.insertFirst(newItem);
         return;
       }
       else {
         let currNode = this.head;
-        while (currNode && (currNode.value !== oldItem)){
+        while (currNode && (currNode.value !== oldItem)) {
           currNode = currNode.next;
         }
-        if (currNode === null){
+        if (currNode === null) {
           this.insertLast(newItem);
           return;
         }
         let newNode = new _Node(newItem, currNode, currNode.previous);
         currNode.previous.next = newNode;
         currNode.previous = newNode;
-        
+
       }
     }
     this.length++;
   }
 
   insertAfter(newItem, oldItem) {
-    if (!this.head){
+    if (!this.head) {
       this.insertFirst(newItem);
       return;
     }
-    
-    if (this.head === this.tail){
+
+    if (this.head === this.tail) {
       this.insertLast(newItem);
       return;
     }
 
     let currNode = this.head;
 
-    while ((currNode.value !== oldItem) && (currNode.next !== null)){
+    while ((currNode.value !== oldItem) && (currNode.next !== null)) {
       currNode = currNode.next;
     }
     if (currNode === this.tail) {
@@ -99,11 +99,34 @@ class DoublyLinkedList {
     currNode.next = newNode;
   }
 
-  insertAt() {
+  insertAt(item, pos) {
+    if (!this.head) {
+      this.insertFirst(item);
+      return;
+    }
+    else {
+      let currNode = this.head;
+      let counter = 0;
+      while (currNode.next !== null) {
+        if (counter === pos - 1) {
+
+          let newNode = new _Node(item, currNode, currNode.previous);
+
+          currNode.previous.next = newNode;          
+          currNode.previous = newNode;
+          this.length++;
+          return;
+        } else {
+          counter++;
+          currNode = currNode.next;
+        }
+      }
+      this.insertLast(item);
+    }
   }
-  
+
   remove(item) {
-    if(!this.head) {
+    if (!this.head) {
       return null;
     }
     else if (this.head.value === item) {
@@ -111,10 +134,10 @@ class DoublyLinkedList {
     }
     else {
       let currNode = this.head;
-      while((currNode !== null) && (currNode.value !== item)) {
+      while ((currNode !== null) && (currNode.value !== item)) {
         currNode = currNode.next;
       }
-      if(currNode === null) {
+      if (currNode === null) {
         console.log('Item not found!');
         return;
       }
@@ -123,13 +146,13 @@ class DoublyLinkedList {
   }
 
   find(item) {
-    if (!this.head){
+    if (!this.head) {
       return null;
     }
 
     let currNode = this.head;
-    while (currNode.value !== item){
-      if(currNode.next === null){
+    while (currNode.value !== item) {
+      if (currNode.next === null) {
         return null;
       }
       else {
@@ -149,15 +172,14 @@ function display(DLL) {
   }
 }
 
-function main () {
+function main() {
   const list = new DoublyLinkedList;
-  list.insertFirst('D');
-  list.insertFirst('C');
-  list.insertFirst('B');
-  list.insertFirst('A');
+  list.insertLast('A');
+  list.insertLast('B');
+  list.insertLast('C');
+  list.insertLast('D');
   list.insertLast('E');
-  list.insertBefore('1', 'A');
-  list.insertAfter('2', 'A');
+  list.insertAt('Z', 3);
   display(list);
 }
 
