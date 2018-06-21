@@ -155,31 +155,31 @@ function isEmpty(SLL) {
 }
 
 function findPrevious(SLL, item) {
-  if(!SLL.head) {
+  if (!SLL.head) {
     return null;
   }
 
   let current = SLL.head;
   let previous = SLL.head;
-  while(current) {
+  while (current) {
 
-    if(current.value === item) {
+    if (current.value === item) {
       return previous;
     }
     previous = current;
     current = current.next;
   }
-  
+
   return null;
 }
 
 function findLast(SLL) {
-  if (!SLL.head){
+  if (!SLL.head) {
     return null;
   }
 
   let current = SLL.head;
-  while(current.next !== null){
+  while (current.next !== null) {
     current = current.next;
   }
   return current;
@@ -217,4 +217,43 @@ function main() {
   // console.log(JSON.stringify(SLL));
 }
 
-main();
+// main();
+
+
+
+function reverseList(SLL) {
+  let current = SLL.head;
+  let previous = null;
+  let next = null;
+
+  while (current) {
+    // console.log('Current: ', current);
+    next = current.next;
+    // console.log('Next: ', next);
+
+
+    current.next = previous;
+    previous = current;
+    current = next;
+
+    console.log('Current: ', current);
+    console.log('Next: ', next);
+    console.log('Previous: ', previous);
+  }
+}
+
+
+function reverseListMain() {
+  const list = new LinkedList();
+  list.insertLast('A');
+  list.insertLast('B');
+  list.insertLast('C');
+  list.insertLast('D');
+  //display(list);
+  console.log(JSON.stringify(list));
+  reverseList(list);
+  // display(list);
+  console.log(JSON.stringify(list));
+}
+
+reverseListMain();
