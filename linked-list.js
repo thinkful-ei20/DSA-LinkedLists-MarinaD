@@ -139,6 +139,17 @@ function display(SLL) {
   }
 }
 
+function size (SLL) {
+  let current = SLL.head;
+
+  let counter = 0;
+  while(current) {
+    counter ++;
+    current = current.next;
+  }
+  return counter;
+}
+
 
 function main() {
 
@@ -161,6 +172,7 @@ function main() {
   
 
   display(SLL);
+  console.log(size(SLL));
 
 
   // console.log(JSON.stringify(SLL));
