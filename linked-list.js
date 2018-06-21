@@ -17,23 +17,43 @@ class LinkedList {
   }
 
   insertBefore(newItem, oldItem) {
-    if (!this.head){
+    if (!this.head) {
       this.insertFirst(newItem);
-      return;
     }
+    else {
+      if (this.head.value === oldItem) {
+        this.insertFirst(newItem);
+      }
+      else {
+        let currNode = this.head;
+        let prevNode = this.head;
+        while ((currNode.value !== oldItem) && (currNode !== null)) {
+          prevNode = currNode;
+          currNode = currNode.next;
+        }
+        prevNode.next = new _Node(newItem, currNode);
+      }
+    }
+  }
 
-    if (this.head.value === oldItem){
+  insertAfter(newItem, oldItem) {
+    if (!this.head) {
       this.insertFirst(newItem);
-      return;
     }
-
-    let currNode = this.head;
-    let prevNode = this.head;
-    while((currNode.value !== oldItem) && (currNode !== null)){
-      prevNode = currNode;
-      currNode = currNode.next;      
+    else {
+      if (this.head.next === null) {
+        this.head.next = new _Node(newItem, null);
+      }
+      else {
+        let currNode = this.head;
+        let nextNode = this.head.next;
+        while ((currNode.value !== oldItem) && (currNode.next !== null)) {
+          currNode = currNode.next;
+          nextNode = currNode.next;
+        }
+        currNode.next = new _Node(newItem, nextNode);
+      }
     }
-    prevNode.next = new _Node(newItem, currNode);
   }
 
   insertLast(item) {
@@ -54,8 +74,8 @@ class LinkedList {
     if (!this.head) {
       return null;
     }
-    while(currNode.value !== item) {
-      if(currNode.next === null) {
+    while (currNode.value !== item) {
+      if (currNode.next === null) {
         return null;
       }
       else {
@@ -66,22 +86,22 @@ class LinkedList {
   }
 
   remove(item) {
-    if(!this.head) {
+    if (!this.head) {
       return null;
     }
 
-    if(this.head.value === item) {
+    if (this.head.value === item) {
       this.head = this.head.next;
       return;
     }
 
     let currNode = this.head;
     let previousNode = this.head;
-    while((currNode !== null) && (currNode.value !== item)) {
+    while ((currNode !== null) && (currNode.value !== item)) {
       previousNode = currNode;
       currNode = currNode.next;
     }
-    if(currNode === null) {
+    if (currNode === null) {
       console.log('Item not found');
       return;
     }
@@ -90,7 +110,7 @@ class LinkedList {
 }
 
 
-function main(){
+function main() {
 
   const SLL = new LinkedList();
   SLL.insertFirst('Apollo');
@@ -104,6 +124,7 @@ function main(){
   SLL.remove('squirrel');
 
   SLL.insertBefore('Athena', 'Starbuck');
+  SLL.insertAfter('Hotdog', 'Helo');
   console.log(JSON.stringify(SLL));
 }
 
