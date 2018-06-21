@@ -173,6 +173,17 @@ function findPrevious(SLL, item) {
   return null;
 }
 
+function findLast(SLL) {
+  if (!SLL.head){
+    return null;
+  }
+
+  let current = SLL.head;
+  while(current.next !== null){
+    current = current.next;
+  }
+  return current;
+}
 
 function main() {
 
@@ -201,6 +212,8 @@ function main() {
   console.log(size(SLL));
   console.log(isEmpty(SLL).toString());
   console.log(findPrevious(SLL, 'Starbuck').value);
+  console.log(findLast(SLL).value);
+
   // console.log(JSON.stringify(SLL));
 }
 
