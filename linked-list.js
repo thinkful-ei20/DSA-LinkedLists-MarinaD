@@ -130,6 +130,15 @@ class LinkedList {
   }
 }
 
+function display(SLL) {
+  let current = SLL.head;
+
+  while(current) {
+    console.log(current.value);
+    current = current.next;    
+  }
+}
+
 
 function main() {
 
@@ -149,7 +158,12 @@ function main() {
   SLL.insertAt('Kat', 3);
 
   SLL.remove('Tauhida');
-  console.log(JSON.stringify(SLL));
+  
+
+  display(SLL);
+
+
+  // console.log(JSON.stringify(SLL));
 }
 
 main();
