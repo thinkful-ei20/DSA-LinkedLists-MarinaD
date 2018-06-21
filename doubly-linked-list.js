@@ -36,10 +36,13 @@ class DoublyLinkedList {
     }
     else {
       let current = this.head;
-      while(current) {
+      while(current.next !== null) {
         current = current.next;
       }
-      current.next = new _Node(item, null, current);
+      const newNode = new _Node(item, null, current);
+      current.next = newNode;
+      this.tail = newNode;
+      this.length++;
     }
   }
 
@@ -115,6 +118,7 @@ function main () {
   list.insertFirst('C');
   list.insertFirst('B');
   list.insertFirst('A');
+  list.insertLast('E');
   console.log(list);
 }
 
