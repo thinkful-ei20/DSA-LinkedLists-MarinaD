@@ -227,33 +227,38 @@ function reverseList(SLL) {
   let next = null;
 
   while (current) {
-    // console.log('Current: ', current);
     next = current.next;
-    // console.log('Next: ', next);
-
-
     current.next = previous;
     previous = current;
     current = next;
-
-    console.log('Current: ', current);
-    console.log('Next: ', next);
-    console.log('Previous: ', previous);
   }
+  SLL.head = previous;
 }
 
+function thirdFromEnd(SLL){
+  if (!SLL.head){
+    return null;
+  }
+  let current = SLL.head;
+  while(current){
+    if(current.next.next.next === null){
+      return current;
+    }
+    current = current.next;
+  }
+  return null;
+}
 
-function reverseListMain() {
+function testing() {
   const list = new LinkedList();
   list.insertLast('A');
   list.insertLast('B');
   list.insertLast('C');
   list.insertLast('D');
-  //display(list);
-  console.log(JSON.stringify(list));
-  reverseList(list);
-  // display(list);
-  console.log(JSON.stringify(list));
+  // console.log(JSON.stringify(list));
+  // reverseList(list);
+  console.log(thirdFromEnd(list));
+  // console.log(JSON.stringify(list));
 }
 
-reverseListMain();
+testing();
