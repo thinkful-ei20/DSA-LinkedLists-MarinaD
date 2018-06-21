@@ -260,6 +260,24 @@ function middleOfList(SLL) {
   return middle;
 }
 
+function cycleInAList(SLL){
+
+  if (!SLL.head){
+    return false;
+  }
+
+  let tracker = [];
+  let current = SLL.head;
+  while(current){
+    if (tracker.includes(current.next)){
+      return true;
+    }
+    tracker.push(current);
+    current = current.next;
+  }
+  return false;
+}
+
 function testing() {
   const list = new LinkedList();
   list.insertLast('A');
@@ -267,12 +285,14 @@ function testing() {
   list.insertLast('C');
   list.insertLast('D');
   list.insertLast('E');
+  list.find('E').next = list.head;
+  console.log(cycleInAList(list));
   // list.insertLast('D');
   // console.log(JSON.stringify(list));
   // reverseList(list);
   // console.log(thirdFromEnd(list));
   // console.log(JSON.stringify(list));
-  console.log(middleOfList(list));
+  // console.log(middleOfList(list));
 }
 
 testing();
