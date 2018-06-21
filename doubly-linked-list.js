@@ -38,13 +38,28 @@ class DoublyLinkedList {
   }
 
   insertAt() {
-
   }
   
-  remove() {
-
+  remove(item) {
+    if(!this.head) {
+      return null;
+    }
+    else if (this.head.value === item) {
+      this.head = this.head.next;
+    }
+    else {
+      let currNode = this.head;
+      while((currNode !== null) && (currNode.value !== item)) {
+        currNode = currNode.next;
+      }
+      if(currNode === null) {
+        console.log('Item not found!');
+        return;
+      }
+      currNode.previous.next = currNode.next;
+    }
   }
 
-  find() {    
+  find() {
   }
 }
