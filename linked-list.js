@@ -220,7 +220,6 @@ function main() {
 // main();
 
 
-
 function reverseList(SLL) {
   let current = SLL.head;
   let previous = null;
