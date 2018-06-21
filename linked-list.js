@@ -16,19 +16,24 @@ class LinkedList {
     this.head = new _Node(item, this.head);
   }
 
-  insertBefore(item) {
+  insertBefore(newItem, oldItem) {
     if (!this.head){
-      this.insertFirst(item);
+      this.insertFirst(newItem);
       return;
     }
-    let currNode = this.head;
-    console.log(currNode);
-    let prevNode = this.head;
-    while((currNode.value !== item) && (currNode !== null)){
-      currNode = currNode.next;
-      prevNode = currNode;
+
+    if (this.head.value === oldItem){
+      this.insertFirst(newItem);
+      return;
     }
-    prevNode.next = new _Node(item, currNode);
+
+    let currNode = this.head;
+    let prevNode = this.head;
+    while((currNode.value !== oldItem) && (currNode !== null)){
+      prevNode = currNode;
+      currNode = currNode.next;      
+    }
+    prevNode.next = new _Node(newItem, currNode);
   }
 
   insertLast(item) {
@@ -98,8 +103,8 @@ function main(){
 
   SLL.remove('squirrel');
 
-  SLL.insertBefore('Athena', 'Boomer');
-  console.log(SLL);
+  SLL.insertBefore('Athena', 'Starbuck');
+  console.log(JSON.stringify(SLL));
 }
 
 main();
