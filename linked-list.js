@@ -285,10 +285,10 @@ function testing() {
   list.insertLast('C');
   list.insertLast('D');
   list.insertLast('E');
-  list.find('E').next = list.head;
+  // list.find('E').next = list.head;
   console.log(cycleInAList(list));
   // list.insertLast('D');
-  // console.log(JSON.stringify(list));
+  console.log(JSON.stringify(list));
   // reverseList(list);
   // console.log(thirdFromEnd(list));
   // console.log(JSON.stringify(list));

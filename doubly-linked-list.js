@@ -1,20 +1,33 @@
 'use strict';
 
 class _Node {
-  constructor() {
-    this.value = null;
-    this.next = null;
-    this.previous = null;
+  constructor(value, next, previous) {
+    this.value = value;
+    this.next = next;
+    this.previous = previous;
   }
 }
 
 class DoublyLinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
   insertFirst(item){
-    this.head = new _Node(item, this.head, null);
+    if (!this.head){
+      const brandNewNode = new _Node(item, null, null);
+      this.head = brandNewNode;
+      this.tail = brandNewNode;
+      this.length++;
+      return;
+    }
+    
+    const newNode = new _Node (item, this.head, null);
+    this.head.previous = newNode; //D - setting prev to be te new thing
+    console.log(this.head);
+    this.head = newNode; // now the head is C 
   }
 
   insertLast(item) {
@@ -30,7 +43,24 @@ class DoublyLinkedList {
     }
   }
 
-  insertBefore() {
+  insertBefore(newItem, oldItem) {
+    if (!this.head){
+      this.insertFirst(newItem);
+    }
+    else {
+      if(this.head.value === oldItem){
+        this.insertFirst(newItem);
+      }
+      else {
+        let currNode = this.head;
+        while ((currNode.value !== oldItem) && (currNode !== null)){
+          currNode = currNode.next;
+        }
+        let newNode = new _Node(newItem, currNode, currNode.previous);
+        currNode.previous.next = newNode;
+        currNode.previous = newNode;
+      }
+    }
   }
 
   insertAfter() {
@@ -60,6 +90,34 @@ class DoublyLinkedList {
     }
   }
 
-  find() {
+  find(item) {
+    if (!this.head){
+      return null;
+    }
+
+    let currNode = this.head;
+    while (currNode.value !== item){
+      if(currNode.next === null){
+        return null;
+      }
+      else {
+        currNode = currNode.next;
+      }
+    }
+    return currNode;
   }
 }
+
+
+function main () {
+  const list = new DoublyLinkedList;
+  list.insertFirst('D');
+  list.insertFirst('C');
+  // list.insertFirst('B');
+  // list.insertFirst('A');
+
+  console.log(JSON.stringify(list));
+
+}
+
+main();
