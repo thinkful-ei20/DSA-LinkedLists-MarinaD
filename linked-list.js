@@ -56,6 +56,27 @@ class LinkedList {
     }
   }
 
+  insertAt(item, position){
+    if (this.head === null){
+      this.insertFirst(item);
+    }
+    else {
+      let currNode = this.head;
+      let counter = 0;
+      while(currNode.next !== null){
+        if (counter === position-1){
+          currNode.next = new _Node(item, currNode.next);
+          return;
+        } else {
+          counter++;
+          currNode = currNode.next;
+        }
+      }
+      currNode.next = new _Node(item, null);
+      return;
+    }
+  }
+
   insertLast(item) {
     if (this.head === null) {
       this.insertFirst(item);
@@ -125,6 +146,9 @@ function main() {
 
   SLL.insertBefore('Athena', 'Starbuck');
   SLL.insertAfter('Hotdog', 'Helo');
+  SLL.insertAt('Kat', 3);
+
+  SLL.remove('Tauhida');
   console.log(JSON.stringify(SLL));
 }
 
