@@ -25,9 +25,9 @@ class DoublyLinkedList {
     }
     
     const newNode = new _Node (item, this.head, null);
-    this.head.previous = newNode; //D - setting prev to be te new thing
-    console.log(this.head);
-    this.head = newNode; // now the head is C 
+    this.head.previous = newNode;
+    this.head = newNode; 
+    this.length++;
   }
 
   insertLast(item) {
@@ -113,11 +113,9 @@ function main () {
   const list = new DoublyLinkedList;
   list.insertFirst('D');
   list.insertFirst('C');
-  // list.insertFirst('B');
-  // list.insertFirst('A');
-
-  console.log(JSON.stringify(list));
-
+  list.insertFirst('B');
+  list.insertFirst('A');
+  console.log(list);
 }
 
 main();
