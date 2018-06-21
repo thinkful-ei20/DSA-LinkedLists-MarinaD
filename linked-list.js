@@ -56,15 +56,15 @@ class LinkedList {
     }
   }
 
-  insertAt(item, position){
-    if (this.head === null){
+  insertAt(item, position) {
+    if (this.head === null) {
       this.insertFirst(item);
     }
     else {
       let currNode = this.head;
       let counter = 0;
-      while(currNode.next !== null){
-        if (counter === position-1){
+      while (currNode.next !== null) {
+        if (counter === position - 1) {
           currNode.next = new _Node(item, currNode.next);
           return;
         } else {
@@ -133,27 +133,53 @@ class LinkedList {
 function display(SLL) {
   let current = SLL.head;
 
-  while(current) {
+  while (current) {
     console.log(current.value);
-    current = current.next;    
+    current = current.next;
   }
 }
 
-function size (SLL) {
+function size(SLL) {
   let current = SLL.head;
 
   let counter = 0;
-  while(current) {
-    counter ++;
+  while (current) {
+    counter++;
     current = current.next;
   }
   return counter;
+}
+
+function isEmpty(SLL) {
+  return (SLL.head === null);
+}
+
+function findPrevious(SLL, item) {
+  if(!SLL.head) {
+    return null;
+  }
+
+  let current = SLL.head;
+  let previous = SLL.head;
+  while(current) {
+
+    if(current.value === item) {
+      return previous;
+    }
+    previous = current;
+    current = current.next;
+  }
+  
+  return null;
 }
 
 
 function main() {
 
   const SLL = new LinkedList();
+
+  console.log(isEmpty(SLL).toString());
+
   SLL.insertFirst('Apollo');
   SLL.insertFirst('Boomer');
   SLL.insertFirst('Helo');
@@ -169,12 +195,12 @@ function main() {
   SLL.insertAt('Kat', 3);
 
   SLL.remove('Tauhida');
-  
+
 
   display(SLL);
   console.log(size(SLL));
-
-
+  console.log(isEmpty(SLL).toString());
+  console.log(findPrevious(SLL, 'Starbuck').value);
   // console.log(JSON.stringify(SLL));
 }
 
