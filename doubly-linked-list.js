@@ -172,6 +172,21 @@ function display(DLL) {
   }
 }
 
+function reverseDll(list){
+  let current = list.head;
+  let previous = null;
+  let next = list.head.next; //set next
+
+  while (current) {
+    next = current.next;
+    current.previous = current.next; //set previous
+    current.next = previous;
+    previous = current;
+    current = next;
+  }
+  list.head = previous;
+}
+
 function main() {
   const list = new DoublyLinkedList;
   list.insertLast('A');
@@ -180,6 +195,7 @@ function main() {
   list.insertLast('D');
   list.insertLast('E');
   list.insertAt('Z', 3);
+  reverseDll(list);
   display(list);
 }
 
