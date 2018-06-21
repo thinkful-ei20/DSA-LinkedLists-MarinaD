@@ -220,26 +220,19 @@ function main() {
 // main();
 
 
-
 function reverseList(SLL) {
   let current = SLL.head;
   let previous = null;
-  let next = null;
 
-  while (current) {
-    // console.log('Current: ', current);
-    next = current.next;
-    // console.log('Next: ', next);
-
+  while(current) {
+    let temp = current.next;
 
     current.next = previous;
     previous = current;
-    current = next;
 
-    console.log('Current: ', current);
-    console.log('Next: ', next);
-    console.log('Previous: ', previous);
+    current = temp;
   }
+  SLL.head = previous;
 }
 
 
@@ -249,11 +242,9 @@ function reverseListMain() {
   list.insertLast('B');
   list.insertLast('C');
   list.insertLast('D');
-  //display(list);
-  console.log(JSON.stringify(list));
+  display(list);
   reverseList(list);
-  // display(list);
-  console.log(JSON.stringify(list));
+  display(list);
 }
 
 reverseListMain();
